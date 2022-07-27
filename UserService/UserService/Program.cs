@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using UserService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<UserContext>(opt => opt.UseSqlServer(builder.Configuration["ConnectionStrings:UserDatabase"]));
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
